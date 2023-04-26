@@ -1,0 +1,41 @@
+#!/bin/bash
+
+suivant(){                                  # On définit une fonction pour le calcule du 
+                                            # terme suivant.
+    length=$(($(echo "$1" | wc -c) - 1))    # Calcul la taille du terme actuel.
+    xSuivant=""
+    nb=0
+    j=1
+    while [ $j -le $length ]                # Itération sur tout les caractères.
+    do
+        chiffre=$(echo "$1" | cut -c $j)    # Caractère du chiffre à compter.
+        nb=1
+        while [ "$chiffre" = "$(echo "$1" | cut -c $(($j + $nb)))" ]
+                                            # Tant que le caractère suivant corrèspond au 
+                                            # même chiffre on compte le nombre 
+                                            # d'occurences.
+        do
+            nb=$(($nb + 1))
+        done
+        xSuivant="$xSuivant$nb$chiffre"     # On ajoute le nombre d'occurences du chiffre 
+                                            # et le chiffre lui-même.
+        j=$(($j + $nb))                     # On passe au chiffre suivant en ignorant les 
+                                            # occurences du chiffre actuel.
+    done
+    echo $xSuivant                          # Equivalent à return.
+}
+
+xn=1                                        # Initialisation de la suite.
+for i in $(seq 0 $1)                        # On affiche jusqu'au rang n.
+do
+    clear
+    if [ $i -lt $1 ]                        # Est-ce qu'il faut calculer la suite ou tirer 
+                                            # la langue.
+    then
+        cowsay -w $xn
+        sleep 1
+        xn=$(suivant $xn)
+    else
+        cowsay -T "U " $xn
+    fi
+done

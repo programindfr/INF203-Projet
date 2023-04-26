@@ -1,0 +1,26 @@
+#!/bin/bash
+
+length=$(($(echo "$1" | wc -c) - 1))    # On récupère la taille de la chaine de 
+                                        # caractère sans compter le caractère \n de 
+                                        # fin.
+for i in $(seq $length)
+do
+    char=$(echo "$1" | cut -c $i)       # La variable char contient le caractère de la 
+                                        # chaine qui se situe à la i-ème position.
+    if [ "$char" = '+' -o "$char" = '-' -o "$char" = '*' -o "$char" = '/' -o "$char" = '%' ]
+                                        # Si char est un opérateur alors on sait comment 
+                                        # découper la chaine puisqu'on connais sa 
+                                        # position.
+    then
+        deb=$(echo "$1" | cut -c 1-$(($i - 1)))
+                                        # deb contient les caractère de la position 1 à 
+                                        # i-1 (la position juste avant l'opetateur).
+        fin=$(echo "$1" | cut -c $(($i + 1))-$length)
+                                        # fin contient les caractères de la position i+1 
+                                        # à length (position juste après l'opérateur 
+                                        # à la position du dernier caractère).
+        cowsay -e "$(($deb $char $fin))" "$deb $char $fin"
+                                        # Selon le contexte, char est interprété comme un 
+                                        # opérateur arithmétique ou un caractère.
+    fi
+done

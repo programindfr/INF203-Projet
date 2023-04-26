@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for i in $(seq $1)
+do
+    clear
+    if [ $i -eq $1 ]                    # test si i est égale au premier argument
+    then
+        cowsay -T "U " $(( $i * $i ))   # si oui la vache tire la langue
+    else
+        cowsay $(( $i * $i ))           # on affiche le carré de i
+        sleep 1
+    fi
+done

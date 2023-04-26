@@ -1,0 +1,36 @@
+#!/bin/bash
+
+f0=0                                    # On définit f1 et f0.
+f1=1
+
+if [ $1 -eq 1 ]                         # Pour n égale à 1, c'est déjà la fin 
+                                        # et la vache tire la langue.
+then
+    cowsay -T "U " "$f0 "               # On ajoute un espace sinon cowsay 
+                                        # reste bloqué pour afficher 0.
+elif [ $1 -ge 2 ]                       # Pour n supérieur ou égale à 2, f0 
+                                        # et f1 sont affichés.
+then
+    cowsay "$f0 "                       # On ajoute aussi un espace pour 0.
+    sleep 1
+    clear
+    cowsay $f1
+    sleep 1
+    while
+        fn=$(($f0 + $f1))
+        [ $fn -lt $1 ]                  # Est-ce que fn+1 est supérieur à n ?
+    do                                  # Non alors on peut l'afficher.
+        clear
+        f0=$f1                          # On incrémente d'un cran f0 et f1.
+        f1=$fn
+        cowsay $f1
+        if [ $(($f0 + $f1)) -lt $1 ]    # Si ce n'est pas le dernier 
+                                        # affichage on attend.
+        then
+            sleep 1
+        fi
+    done                                # Oui alors la vache tire la langue 
+                                        # en affichant fn.
+    clear
+    cowsay -T "U " $f1
+fi

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+i=2                                             # 0 et 1 ne sont pas des nombres premiers.
+while [ $(($i * $i)) -lt $1 ]                   # On cherche la racine de n.
+do
+    i=$(($i + 1))
+done
+
+lastPrime=2                                     # On mémorise le dernier nombre premier 
+                                                # pour l'afficher en tirant la langue.
+for k in $(seq 2 $1)
+do
+    isPrime=0                                   # Booleen pour savoir si le nombre est 
+                                                # premier.
+    for j in $(seq 2 $i)
+    do
+        if [ $(($k % $j)) -eq 0 -a $k -ne $j ]  # Si k modulo j est égale à 0 et que k est 
+                                                # différent de j alors k n'est pas premier 
+                                                # (pour j quelconque fixé entre 2 et 
+                                                # racine de n).
+        then
+            isPrime=1                           # Booleen indiquant que k n'est pas 
+                                                # premier.
+        fi
+    done
+    if [ $isPrime -eq 0 ]                       # Si k est premier on l'affiche.
+    then
+        if [ $k -gt 2 ]                         # Pas de pause avant le premier affichage.
+        then
+            sleep 1
+        fi
+        lastPrime=$k                            # On mémorise le nombre premier actuel.
+        clear
+        cowsay $lastPrime                       # On affiche le nombre premier actuel.
+    fi
+done
+
+if [ $1 -ge 2 ]                                 # 0 et 1 ne sont pas premiers.
+then
+    clear
+    cowsay -T "U " $lastPrime                   # La vache tire la langue pour le dernier 
+                                                # nombre premier.
+fi
