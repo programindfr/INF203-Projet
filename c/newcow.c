@@ -18,6 +18,8 @@ typedef struct                      // Le type cow est une structure anonyme qui
     char eyes[2];                   // Les yeux de la vache.
     char tongue[2];
     int sayPos;                     // La position du premier argument qui n'est pas une option.
+    int width;
+    int tail;
 } cow;
 
 
@@ -41,13 +43,63 @@ compare_chaine(char *chaine1, char *chaine2)        // Fonction qui compare deux
 }
 
 
-void
-affiche_vache(cow vache)                            // Affiche la vache avec ses attributs.
+int
+longueur_chaine(char *chaine)                       // Donne la longueur d'une chaine.
 {
+    int i = 0;
+    for (; chaine[i] != '\0'; i++) {}
+    return i;
+}
+
+
+void
+affiche_textbox(cow vache, int argc, char *argv[])      // Pas fini...
+{
+    int texteLength = 0;
+    int position = (vache.sayPos == -1) ? argc : vache.sayPos;
+    
+    for (int i = position; i < argc; i++)
+    {
+        texteLength += longueur_chaine(argv[i]) + 1;
+    }
+    
+    printf(" __");
+
+    for (int i = 1; i < texteLength && i < vache.width; i++)
+    {
+        printf("_");
+    }
+
+    printf("\n< ");
+
+    for (int i = position; i < argc; i++)
+    {
+        printf("%s%c", argv[i], (i + 1 < argc) ? ' ' : '\0');
+    }
+
+    printf(" >\n _");
+
+    for (int i = 1; i < texteLength && i < vache.width; i++)
+    {
+        printf("_");
+    }
+
+    printf("_\n");
+}
+
+
+void
+affiche_vache(cow vache, int argc, char *argv[])                            // Affiche la vache avec ses attributs.
+{
+    affiche_textbox(vache, argc, argv);
     printf("        \\   ^__^\n");
     printf("         \\  (%c%c)\\_______\n", vache.eyes[0], vache.eyes[1]); // On affiche les yeux contenus dans les attributs de la vache.
-    printf("            (__)\\       )\\/\\\n");
-    printf("             %c%c ||----w |\n", vache.tongue[0], vache.tongue[1]);  // On affiche la langue contenu dans les attributs de la vache.
+    printf("            (__)\\       )");
+    for (int i = 0; i < vache.tail; i++)
+    {
+        printf("%c", (i % 2 == 0) ? '\\' : '/');
+    }
+    printf("\n             %c%c ||----w |\n", vache.tongue[0], vache.tongue[1]);  // On affiche la langue contenu dans les attributs de la vache.
     printf("                ||     ||\n");
 }
 
@@ -58,7 +110,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
     int passerArgument = 0;
     for (int i = 1; i < argc; i++)              // Boucle sur tout les arguments.
     {
-        if (i + passerArgument >= argc) {
+        if (i + passerArgument >= argc || vache->sayPos != -1) {       // On arrête la boucle s'il n'y a plus d'argument après ou si du texte normal est trouvé.
             break;
         }
         i += passerArgument;
@@ -92,7 +144,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'e':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     if (i + 1 >= argc) {     // On vérifie qu'il existe un argument après.
@@ -107,7 +159,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'T':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     if (i + 1 >= argc) {     // On vérifie qu'il existe un argument après.
@@ -122,7 +174,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'b':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = '=';
@@ -132,7 +184,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'd':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = 'x';
@@ -144,7 +196,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'g':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = '$';
@@ -154,7 +206,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'p':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = '@';
@@ -164,7 +216,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 's':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = '*';
@@ -176,7 +228,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 't':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = '-';
@@ -186,7 +238,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'w':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = 'O';
@@ -196,7 +248,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 case 'y':
                     etat = FIN;
                     if (argv[i][j + 1] != '\0') {
-                        fprintf(stderr, "Option %s inconnue.\n");
+                        fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
                     vache->eyes[0] = '.';
@@ -205,39 +257,46 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 default:
                     etat = FIN;
+                    fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                     break;
                 }
                 break;
             
             case OPTION2:
-                switch (argv[i][j])
-                {
-                case 'e':
-                    etat = FIN;
-                    if (i + 1 < argc) {     // On vérifie qu'il existe un argument après.
-                        vache->eyes[0] = argv[i + 1][0];
-                        vache->eyes[1] = argv[i + 1][1];
-                        passerArgument = 1; // On saute le prochain argument.
-                    } else {
+                etat = FIN;
+                if (compare_chaine("--eyes", argv[i])) {
+                    if (i + 1 >= argc) {    // On vérifie qu'il existe un argument après.
                         fprintf(stderr, "Option --eyes argument manquant.\n");
+                        break;
                     }
+                    vache->eyes[0] = argv[i + 1][0];
+                    vache->eyes[1] = argv[i + 1][1];
+                    passerArgument = 1; // On saute le prochain argument.
                     break;
-                
-                case 't':
-                    etat = FIN;
-                    if (i + 1 < argc) {     // On vérifie qu'il existe un argument après.
-                        vache->tongue[0] = argv[i + 1][0];
-                        vache->tongue[1] = argv[i + 1][1];
-                        passerArgument = 1; // On saute le prochain argument.
-                    } else {
+                } else if (compare_chaine("--tongue", argv[i])) {
+                    if (i + 1 >= argc) {    // On vérifie qu'il existe un argument après.
                         fprintf(stderr, "Option --tongue argument manquant.\n");
+                        break;
                     }
-                    break;
-                
-                default:
-                    etat = FIN;
+                    vache->tongue[0] = argv[i + 1][0];
+                    vache->tongue[1] = argv[i + 1][1];
+                    passerArgument = 1; // On saute le prochain argument.
                     break;
                 }
+                else if (compare_chaine("--tail", argv[i])) {
+                    if (i + 1 >= argc) {    // On vérifie qu'il existe un argument après.
+                        fprintf(stderr, "Option --tail argument manquant.\n");
+                        break;
+                    }
+                    int result = sscanf(argv[i + 1], "%d", &(vache->tail));
+                    if (result != 1) {
+                        fprintf(stderr, "Option --tail argument %s non entier.\n", argv[i + 1]);
+                        break;
+                    }
+                    passerArgument = 1; // On saute le prochain argument.
+                    break;
+                }
+                fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                 break;
             
             case FIN:
@@ -258,11 +317,13 @@ main(int argc, char *argv[])
     cow vache = {
         .eyes = { 'o', 'o' },
         .tongue = { ' ', ' ' },
-        .sayPos = 1
+        .sayPos = -1,
+        .width = 40,
+        .tail = 3
     };
 
     options_vache(&vache, argc, argv);
-    affiche_vache(vache);
+    affiche_vache(vache, argc, argv);
 
     return 0;
 }
