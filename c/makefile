@@ -1,8 +1,12 @@
-SOURCES = newcow.c cow.c cow_traitement.c cow_affichage.c chaine_operation.c
-EXE = newcow
-LD = gcc
+SOURCES1 = newcow.c cow.c cow_traitement.c cow_affichage.c chaine_operation.c
+EXE1 = newcow
 
-default: $(EXE)
+$(EXE1): 
+	gcc $(SOURCES1) -o $(EXE1)
 
-$(EXE): 
-	$(LD) $(SOURCES) -o $(EXE)
+
+SOURCES2 = wildcow.c
+EXE2 = wildcow
+
+$(EXE2): 
+	gcc $(SOURCES2) -o $(EXE2)
