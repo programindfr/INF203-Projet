@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 
 void
@@ -10,15 +11,18 @@ update()
 void
 gotoxy(int x ,int y)
 {
-    printf("\033[%d;%dH", x, y);
+    printf("\033[%d;%dH", y, x);
 }
 
 
 int
 main(int argc, char *argv[])
 {
-    printf("Hello World !");
-    gotoxy(4, 0);
-    // update();
+    update();
+    printf("Hello World !\nHello World !\nHello World !\nHello World !\nHello World !\nHello World !\nHello World !\n");
+    gotoxy(0, 0);
+    printf("\033[0;96mMathias");
+    gotoxy(0, 8);
+    printf("\033[39m");
     return 0;
 }
