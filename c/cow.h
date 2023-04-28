@@ -10,6 +10,8 @@ typedef struct                      // Le type cow est une structure anonyme qui
     int tail;
     int tall;
     int neck;
+    int color[16];
+    int colorLen;
 } cow;
 
 #endif
