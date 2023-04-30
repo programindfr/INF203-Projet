@@ -1,0 +1,10 @@
+ProjetCowsay.pdf
+tex/*.aux
+tex/*.log
+tex/*.out
+tex/*.pdf
+tex/*.gz
+tex/*.toc
+tex/_minted-CompteRendu
+c/newcow
+c/wildcow
