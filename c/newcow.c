@@ -16,7 +16,7 @@ main(int argc, char *argv[])
         .tail = 3,
         .tall = 1,
         .neck = 0,
-        .color = { WHITE, },
+        .color = { BRIGHT_WHITE, },
         .colorLen = 1
     };
 
