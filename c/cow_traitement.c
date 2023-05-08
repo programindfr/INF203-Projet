@@ -48,7 +48,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
 
                 case 'e':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -63,7 +63,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'T':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -78,7 +78,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'W':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -96,7 +96,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'b':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -106,7 +106,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'd':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -118,7 +118,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'g':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -128,7 +128,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'p':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -138,7 +138,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 's':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -150,7 +150,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 't':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -160,7 +160,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'w':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }
@@ -170,7 +170,7 @@ options_vache(cow *vache, int argc, char *argv[])   // Cette fonction détermine
                 
                 case 'y':
                     etat = FIN;
-                    if (argv[i][j + 1] != '\0') {
+                    if (argv[i][j + 1] != '\0') {       // On vérifie qu'il n'y a pas de lettre après.
                         fprintf(stderr, "Option %s inconnue.\n", argv[i]);
                         break;
                     }

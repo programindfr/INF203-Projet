@@ -9,26 +9,26 @@
 void
 update()
 {
-    printf("\033[H\033[J");
+    printf("\033[H\033[J");     // Positionne le curseur en haut à gauche de l'écran.
 }
 
 void
 gotoxy(int x ,int y)
 {
-    printf("\033[%d;%dH", y, x);
+    printf("\033[%d;%dH", y, x);    // Positionne le curseur aux coordonnées.
 }
 
 void
 reset()
 {
-    printf("\033[39m");
+    printf("\033[39m");     // Reset la couleur du texte.
 }
 
 
 int
 main(int argc, char *argv[])
 {
-    cow vache = {
+    cow vache = {               // Définit la vache.
         .eyes = { 'o', 'o' },
         .tongue = { ' ', ' ' },
         .sayPos = -1,
@@ -43,19 +43,19 @@ main(int argc, char *argv[])
         },
         .colorLen = 16
     };
-    struct timespec ts = {
+    struct timespec ts = {      // Structure de temps de 0.1s.
         .tv_sec = 0,
         .tv_nsec = 100 * 1000000
     };
 
-    options_vache(&vache, argc, argv);
-    for (int i = 0; i < 60; i++)
+    options_vache(&vache, argc, argv);      // Change la vache en fonction des options.
+    for (int i = 0; i < 60; i++)            // Pendant 6s.
     {
-        update();
-        affiche_vache(vache, argc, argv);
-        nanosleep(&ts, &ts);
+        update();                           // Efface l'écran.
+        affiche_vache(vache, argc, argv);   // Affiche en couleur.
+        nanosleep(&ts, &ts);                // Pause de 0.1s.
     }
-    reset();
+    reset();                                // Reset la couleur d'affichage.
 
     return 0;
 }

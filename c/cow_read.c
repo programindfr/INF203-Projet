@@ -4,7 +4,7 @@
 
 
 void
-read_vache(int argc, char *argv[], char *outv[])
+read_vache(int argc, char *argv[], char *outv[])        // Copie de tableaux 2d.
 {
     for (int i = 0; i < argc; i++)
     {
@@ -17,7 +17,7 @@ read_vache(int argc, char *argv[], char *outv[])
 
 
 int
-read_size(int argc, char *argv[])
+read_size(int argc, char *argv[])       // Donne la taille du plus grand element d'un tableau 2d.
 {
     int maxSize = 0;
     int size;

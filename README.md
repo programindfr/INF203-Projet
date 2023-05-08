@@ -2,6 +2,7 @@
 Projet semestriel réalisé par :
 - Mathias Rivet
 - Maël Perrier
+
 Les fichiers sources, les programmes compilés (pour linux) et la version pdf du compte-rendu sont disponibles dans la section `releases` (https://github.com/programindfr/INF203-Projet/releases).
 
 ## Organisation

@@ -8,7 +8,7 @@
 int
 main(int argc, char *argv[])
 {
-    cow vache = {
+    cow vache = {                               // Définit la vache.
         .eyes = { 'o', 'o' },
         .tongue = { ' ', ' ' },
         .sayPos = -1,
@@ -20,8 +20,8 @@ main(int argc, char *argv[])
         .colorLen = 1
     };
 
-    options_vache(&vache, argc, argv);
-    affiche_vache(vache, argc, argv);
+    options_vache(&vache, argc, argv);          // Change la vache selon les options.
+    affiche_vache(vache, argc, argv);           // Affiche la vache.
 
     return 0;
 }

@@ -11,7 +11,7 @@
 int
 main(int argc, char *argv[])
 {
-    cow vache = {
+    cow vache = {                   // Crée la vache.
         .eyes = { 'o', 'o' },
         .tongue = { ' ', ' ' },
         .sayPos = -1,
@@ -23,7 +23,7 @@ main(int argc, char *argv[])
         .colorLen = 1
     };
 
-    FILE *file = stdin;
+    FILE *file = stdin;                 // Si le premier argument est un fichier on le lis sinon on prends depuis stdin.
     if (argc > 1) {
         file = fopen(argv[1], "r");
         if (file == NULL) {
@@ -37,7 +37,7 @@ main(int argc, char *argv[])
     while (!feof(file))
     {
         ichar++;
-        fscanf(file, "%c", &buffer[ichar]);
+        fscanf(file, "%c", &buffer[ichar]);     // On stock le contenu du fichier.
     }
 
     int newargc = argc + 1;
@@ -48,18 +48,18 @@ main(int argc, char *argv[])
     newargv = malloc(newargc * sizeof(*newargv));
     for (int i = 0; i < newargc; i++)
     {
-        newargv[i] = malloc(newsize * sizeof(newargv[0]));
+        newargv[i] = malloc(newsize * sizeof(newargv[0]));      // Tableau 2d dynamiquement alloué.
     }
 
-    read_vache(argc, argv, newargv);
+    read_vache(argc, argv, newargv);        // Copie.
 
     for (int i = 0; i < ichar; i++)
     {
-        newargv[newargc - 1][i] = buffer[i];
+        newargv[newargc - 1][i] = buffer[i];        // Ajout du texte après les options.
     }
 
-    options_vache(&vache, newargc, newargv);
-    affiche_vache2(vache, newargc, newargv);
+    options_vache(&vache, newargc, newargv);    // Change la vache en fonction des options.
+    affiche_vache2(vache, newargc, newargv);    // Affiche la vache (j'ai pas réussi à finir).
 
     return 0;
 }

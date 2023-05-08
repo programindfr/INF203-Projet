@@ -1,7 +1,7 @@
 #ifndef __COLOR_PRINTF_H__
 #define __COLOR_PRINTF_H__
 
-#define BLACK 30
+#define BLACK 30            // define les couleurs selon ANSI escape code.
 #define RED 31
 #define GREEN 32
 #define YELLOW 33
